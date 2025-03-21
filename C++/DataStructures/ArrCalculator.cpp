@@ -65,7 +65,7 @@ void add_nums(number_data& numbers)
     {
         print_splitter(); 
 
-        double hi = numbers.values[i] = is_valid_double("Enter value number " + std::to_string(i+1) + ": ");
+        numbers.values[i] = is_valid_double("Enter value number " + std::to_string(i+1) + ": ");
         
         
     }

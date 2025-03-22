@@ -45,7 +45,7 @@ struct shop_data
 // Functions *******************************
 void add_new_product(shop_data &shop);
 int get_valid_integer(string prompt);
-int get_valid_double(string prompt);
+double get_valid_double(string prompt);
 string read_string(string prompt);
 void print_products(const shop_data &shop);
 void remove_product(shop_data &shop);
@@ -238,7 +238,7 @@ int get_valid_integer(string prompt)
 }
 
 //Same as the get_valid_integer function however for a double input.
-int get_valid_double(string prompt)
+double get_valid_double(string prompt)
 {
     write(prompt);
     string input = read_line();
@@ -320,15 +320,16 @@ void sell_product(shop_data &shop)
 // Check the ammount of all on hand products.
 void on_hand_value(const shop_data &shop)
 {
-    double total;
+    double total = 0;
 
     for (int i = 0; i < shop.current_product_num; i++)
     {
         //Add the product to the total.
         total += shop.products[i].sales_price * shop.products[i].inventory;
 
-        write_line("The total value of your inventory is: " + std::to_string(total));
     }
+
+    write_line("The total value of your inventory is: " + std::to_string(total));
 }
 
 //Check the products low on stock.
@@ -359,7 +360,10 @@ void print_status(shop_data &shop)
     write_line("Total profit is: $" + std::to_string(shop.total_profit));
 
     write_line("Total number of products are: " + std::to_string(shop.current_product_num));
+
+    on_hand_value(shop);
 }
+
 
 
 //Print the main menu options.
